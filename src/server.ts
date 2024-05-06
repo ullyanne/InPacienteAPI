@@ -1,4 +1,5 @@
 import fastify from "fastify";
+import cors from '@fastify/cors'
 import { serializerCompiler, validatorCompiler } from "fastify-type-provider-zod"
 import { createPatient } from "@routes/patient/createPatient";
 import { getPatient } from "@routes/patient/getPatient";
@@ -12,8 +13,14 @@ import { deleteDoctor } from "@routes/doctor/deleteDoctor";
 import { updateAppointment } from "@routes/appointment/updateAppointment";
 import { updatePatient } from "@routes/patient/updatePatient";
 import { updateDoctor } from "@routes/doctor/updateDoctor";
+import { getPatients } from "@routes/patient/getPatients";
 
 const app = fastify()
+
+app.register(cors, {
+  origin:'*',
+  methods:'*'
+})
 
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
@@ -22,6 +29,7 @@ app.register(createPatient)
 app.register(getPatient)
 app.register(deletePatient)
 app.register(updatePatient)
+app.register(getPatients)
 
 app.register(createAppointment)
 app.register(getPatientAppointment)
