@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -26,9 +27,9 @@ model Patient {
 model Appointment {
   id         String   @id @default(uuid())
   date       DateTime
-  patient    Patient  @relation(fields: [patientCpf], references: [cpf])
+  patient    Patient  @relation(fields: [patientCpf], references: [cpf], onDelete: Cascade)
   patientCpf String
-  doctor     Doctor   @relation(fields: [doctorCrm], references: [crm])
+  doctor     Doctor   @relation(fields: [doctorCrm], references: [crm], onDelete: Cascade)
   doctorCrm  String
 
   @@map("appointment")
