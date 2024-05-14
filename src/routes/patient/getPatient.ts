@@ -45,7 +45,7 @@ export async function getPatient(app: FastifyInstance) {
       })
 
       if (patient === null){
-        throw new Error('Patient not found.')
+        return reply.status(404).send()
       }
 
       return reply.send({
