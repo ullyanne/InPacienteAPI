@@ -8,6 +8,8 @@ export async function updateDoctor(app: FastifyInstance) {
     .withTypeProvider<ZodTypeProvider>()
     .patch('/doctors/:doctorCrm', {
       schema: {
+        summary: 'Update an existing doctor registry',
+        tags: ['doctors'],
         body: z.object({
           crm: z.string().optional(),
           specialty: z.string().optional()

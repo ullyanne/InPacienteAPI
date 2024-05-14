@@ -8,6 +8,8 @@ export async function getAppointment(app: FastifyInstance) {
     .withTypeProvider<ZodTypeProvider>()
     .get('/appointments/:appointmentId', {
       schema: {
+        summary: 'Returns appointment data by ID',
+        tags: ['appointments'],
         params: z.object({
           appointmentId: z.string()
         }),

@@ -8,6 +8,8 @@ export async function getDoctor(app: FastifyInstance) {
     .withTypeProvider<ZodTypeProvider>()
     .get('/doctors/:doctorCrm', {
       schema: {
+        summary: 'Get doctor by ID',
+        tags: ['doctors'],
         params: z.object({
           doctorCrm: z.string()
         }),

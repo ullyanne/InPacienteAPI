@@ -8,6 +8,8 @@ export async function deleteAppointment(app: FastifyInstance) {
     .withTypeProvider<ZodTypeProvider>()
     .delete('/appointments/:appointmentId', {
       schema: {
+        summary: 'Delete an appointment registry by ID',
+        tags: ['appointments'],
         params: z.object({
           appointmentId: z.string().uuid()
         }),

@@ -8,6 +8,8 @@ export async function createAppointment(app: FastifyInstance) {
     .withTypeProvider<ZodTypeProvider>()
     .post('/appointments', {
       schema: {
+        summary: 'Create an appointment registry',
+        tags: ['appointments'],
         body: z.object({
           patientCpf: z.string(),
           date: z.string().datetime(),

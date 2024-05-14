@@ -8,6 +8,8 @@ export async function deleteDoctor(app: FastifyInstance) {
     .withTypeProvider<ZodTypeProvider>()
     .delete('/doctors/:doctorCrm', {
       schema: {
+        summary: 'Delete a doctor registry by ID',
+        tags: ['doctors'],
         params: z.object({
           doctorCrm: z.string()
         }),

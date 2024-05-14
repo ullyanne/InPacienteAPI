@@ -8,6 +8,8 @@ export async function createPatient(app: FastifyInstance) {
     .withTypeProvider<ZodTypeProvider>()
     .post('/patients', {
       schema: {
+        summary: 'Create a patient registry',
+        tags: ['patients'],
         body: z.object({
           cpf: z.string(),
           name: z.string(),

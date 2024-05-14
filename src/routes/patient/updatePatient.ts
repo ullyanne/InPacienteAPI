@@ -8,6 +8,8 @@ export async function updatePatient(app: FastifyInstance) {
     .withTypeProvider<ZodTypeProvider>()
     .patch('/patients/:patientCpf', {
       schema: {
+        summary: 'Update an existing patient by ID',
+        tags: ['patients'],
         body: z.object({
           address: z.string().optional(),
           phoneNumber: z.string().optional().nullable()

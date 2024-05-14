@@ -8,6 +8,8 @@ export async function createDoctor(app: FastifyInstance) {
     .withTypeProvider<ZodTypeProvider>()
     .post('/doctors', {
       schema: {
+        summary: 'Create a doctor registry',
+        tags: ['doctors'],
         body: z.object({
           crm: z.string(),
           specialty: z.string(),
