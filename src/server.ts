@@ -14,6 +14,9 @@ import { updateAppointment } from "@routes/appointment/updateAppointment";
 import { updatePatient } from "@routes/patient/updatePatient";
 import { updateDoctor } from "@routes/doctor/updateDoctor";
 import { getPatients } from "@routes/patient/getPatients";
+import { getAppointments } from "@routes/appointment/getAppointments";
+import { getAppointment } from "@routes/appointment/getAppointment";
+import { getDoctors } from "@routes/doctor/getDoctors";
 
 const app = fastify()
 
@@ -32,12 +35,15 @@ app.register(updatePatient)
 app.register(getPatients)
 
 app.register(createAppointment)
+app.register(getAppointments)
+app.register(getAppointment)
 app.register(getPatientAppointment)
 app.register(deleteAppointment)
 app.register(updateAppointment)
 
 app.register(createDoctor)
 app.register(getDoctor)
+app.register(getDoctors)
 app.register(deleteDoctor)
 app.register(updateDoctor)
 
