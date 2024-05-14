@@ -10,7 +10,7 @@ export async function updatePatient(app: FastifyInstance) {
       schema: {
         body: z.object({
           address: z.string().optional(),
-          phoneNumber: z.string().optional()
+          phoneNumber: z.string().optional().nullable()
         }),
         params: z.object({
           patientCpf: z.string()
