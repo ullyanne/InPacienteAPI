@@ -9,7 +9,8 @@ export async function getPatients(app: FastifyInstance) {
     .get('/patients', {
       schema: {
         querystring: z.object({
-          search: z.string().optional()
+          search: z.string().optional(),
+          pageIndex: z.string().optional().nullable().default('0').transform(Number)
         }),
         response: {
           200: z.object({
@@ -20,16 +21,21 @@ export async function getPatients(app: FastifyInstance) {
                 address: z.string(),
                 phoneNumber: z.string().nullable(),
               })
-            )
+            ),
+            patientsAmount: z.number(),
           })
         }
       }
     }, async (request, reply) => {
 
       const searchQuery = request.query.search
-      const filteredSearchQuery = typeof searchQuery === 'string' 
-      ? searchQuery.replace(/[^\p{L}\p{N}\s%]/gu, '').replace(/[\s]/, '&')
-      : '';
+      const filteredSearchQuery = typeof searchQuery === 'string'
+        ? searchQuery.replace(/[^\p{L}\p{N}\s%]/gu, '').replace(/[\s]/, '&')
+        : '';
+
+      const pageIndex = request.query.pageIndex
+
+      const patientsAmount = await prisma.patient.count()
 
       const patients = await prisma.patient.findMany({
         select: {
@@ -61,12 +67,15 @@ export async function getPatients(app: FastifyInstance) {
               }
             }
           ]
+        },
 
+        take: 10,
+        skip: pageIndex * 10,
+        orderBy: {
+          createdAt: 'desc'
         }
       })
 
-      // searchParams = '_' + searchParams
-
-      return reply.send({ patients: patients })
+      return reply.send({ patients: patients, patientsAmount: patientsAmount })
     })
 }
