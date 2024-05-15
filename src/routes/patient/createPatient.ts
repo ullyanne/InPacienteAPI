@@ -26,6 +26,16 @@ export async function createPatient(app: FastifyInstance) {
 
       const data = request.body
 
+      const doesPatientExist = await prisma.patient.findUnique({
+        where: {
+          cpf: data.cpf,
+        }
+      })
+
+      if (doesPatientExist){
+        return reply.status(409).send()
+      }
+
       const patient = await prisma.patient.create({
         data: {
           cpf: data.cpf,

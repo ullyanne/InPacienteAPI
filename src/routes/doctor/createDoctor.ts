@@ -25,6 +25,16 @@ export async function createDoctor(app: FastifyInstance) {
 
       const { crm, specialty, name } = request.body
 
+      const doesDoctorExist = await prisma.doctor.findUnique({
+        where: {
+          crm: crm
+        }
+      })
+
+      if (doesDoctorExist){
+        return reply.status(409).send()
+      }
+
       const doctor = await prisma.doctor.create({
         data: {
           crm,
