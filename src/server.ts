@@ -66,4 +66,7 @@ app.register(getDoctors)
 app.register(deleteDoctor)
 app.register(updateDoctor)
 
-app.listen({ port: 3333 }) 
+app.listen({ 
+  host: '0.0.0.0',
+  port: 3333 
+}) 
