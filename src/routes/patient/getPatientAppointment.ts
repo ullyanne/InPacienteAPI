@@ -51,6 +51,10 @@ export async function getPatientAppointment(app: FastifyInstance) {
               gte: new Date()
             }
           },
+
+          orderBy: {
+            createdAt: 'asc'
+          }
         }
       )
 
