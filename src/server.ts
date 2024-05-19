@@ -37,11 +37,14 @@ app.register(fastifySwagger, {
 
 app.register(fastifySwaggerUi, {
   routePrefix: '/docs',
+  uiConfig: {
+    supportedSubmitMethods: []
+  }
 })
 
 app.register(cors, {
-  origin: '*',
-  methods: '*'
+  origin: process.env.APP_URL,
+  methods: process.env.APP_URL
 })
 
 app.setValidatorCompiler(validatorCompiler);
@@ -66,7 +69,7 @@ app.register(getDoctors)
 app.register(deleteDoctor)
 app.register(updateDoctor)
 
-app.listen({ 
+app.listen({
   host: '0.0.0.0',
   port: process.env.PORT? Number(process.env.PORT) : 3333
-}) 
+})
