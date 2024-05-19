@@ -74,7 +74,8 @@ export async function getAppointments(app: FastifyInstance) {
               {
                 doctor: {
                   specialty: {
-                    startsWith: filteredSearchQuery
+                    startsWith: filteredSearchQuery,
+                    mode: 'insensitive'
                   }
                 }
               },

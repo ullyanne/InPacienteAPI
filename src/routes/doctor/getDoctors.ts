@@ -58,7 +58,8 @@ export async function getDoctors(app: FastifyInstance) {
             },
             {
               specialty: {
-                search: filteredSearchQuery
+                startsWith: filteredSearchQuery,
+                mode: 'insensitive'
               }
             },
           ]
