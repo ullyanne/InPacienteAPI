@@ -44,7 +44,7 @@ app.register(fastifySwaggerUi, {
 
 app.register(cors, {
   origin: process.env.APP_URL,
-  methods: process.env.APP_URL
+  methods: '*'
 })
 
 app.setValidatorCompiler(validatorCompiler);
